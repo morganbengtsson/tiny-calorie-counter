@@ -1,6 +1,6 @@
 # Tiny calorie counter
 
-[![Build Status](https://travis-ci.org/morganbengtsson/tinycaloriecounter.svg?branch=master)](https://travis-ci.org/morganbengtsson/tinycaloriecounter)
+[![Build Status](https://travis-ci.org/morganbengtsson/tiny-calorie-counter.svg?branch=master)](https://travis-ci.org/morganbengtsson/tiny-calorie-counter)
 
 # Introduction
 
