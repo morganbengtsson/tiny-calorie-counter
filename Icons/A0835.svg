@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="48"
+   height="48"
+   viewBox="0 0 12.7 12.7"
+   version="1.1"
+   id="svg1376"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)"
+   sodipodi:docname="A0835.svg">
+  <title
+     id="title824">Kötträtt</title>
+  <defs
+     id="defs1370">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 6.35 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="12.7 : 6.35 : 1"
+       inkscape:persp3d-origin="6.35 : 4.2333333 : 1"
+       id="perspective824" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="11.313708"
+     inkscape:cx="32.354587"
+     inkscape:cy="18.556552"
+     inkscape:document-units="mm"
+     inkscape:current-layer="g886-6"
+     showgrid="true"
+     units="px"
+     inkscape:window-width="2048"
+     inkscape:window-height="1101"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:snap-global="false"
+     showguides="false">
+    <inkscape:grid
+       type="xygrid"
+       id="grid1944" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata1373">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>Kötträtt</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-284.29998)">
+    <g
+       transform="translate(12.550652,-0.32878133)"
+       id="layer1-5"
+       inkscape:label="Layer 1">
+      <g
+         transform="translate(-13.116954,-0.99054752)"
+         id="g886-6">
+        <g
+           transform="matrix(1.6842981,0,0,1.6842981,-1.3276883,-196.75291)"
+           style="fill:#009100;stroke-width:0.59371912"
+           id="g1116-7-2" />
+        <path
+           style="opacity:0.2;fill:#2d2d2d;fill-opacity:1;stroke:none;stroke-width:0.52916664;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           d="m 11.401692,294.0779 c 0,0.29316 -0.236008,0.52917 -0.529167,0.52917 H 3.1844629 c -0.2931584,0 -0.6741153,-0.27435 -0.5291667,-0.52917 0,0 2.7361719,-5.62382 4.3030395,-5.70024 1.5668673,-0.0764 4.4433563,5.70024 4.4433563,5.70024 z"
+           id="rect845-3"
+           inkscape:connector-curvature="0"
+           sodipodi:nodetypes="sssszs" />
+        <path
+           style="opacity:1;fill:#f6f3f3;fill-opacity:1;stroke:none;stroke-width:0.52916664;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           d="m 11.277128,293.81449 c 0,0.29316 -0.236008,0.52917 -0.529167,0.52917 H 3.0598998 c -0.2931583,0 -0.6741152,-0.27435 -0.5291666,-0.52917 0,0 2.7361716,-5.62382 4.3030393,-5.70024 1.5668676,-0.0764 4.4433555,5.70024 4.4433555,5.70024 z"
+           id="rect845"
+           inkscape:connector-curvature="0"
+           sodipodi:nodetypes="sssszs" />
+      </g>
+    </g>
+  </g>
+</svg>

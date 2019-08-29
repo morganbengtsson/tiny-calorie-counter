@@ -1,0 +1,10 @@
+@{
+    var action = ViewContext?.RouteData?.Values["Action"]?.ToString();
+}
+<nav style="margin-top: 1em;">
+    <ul class = "flex">
+        <li><a asp-action="Week" asp-route-year = "@DateTime.Now.Year" asp-route-week="@DateUtils.GetIso8601WeekOfYear(DateTime.Now)" class='@(action == "Week" ? "active" : "")'>Week</a></li>
+        <li><a asp-action="Month" asp-route-year = "@DateTime.Now.Year" asp-route-month="@DateTime.Now.Month" class='@(action == "Month" ? "active" : "")'>Month</a></li>
+        <li><a asp-action="Year" asp-route-year = "@DateTime.Now.Year" class='@(action == "Year" ? "active" : "")'>Year</a></li>
+    </ul>
+</nav>

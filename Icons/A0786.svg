@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="48"
+   height="48"
+   viewBox="0 0 12.7 12.7"
+   version="1.1"
+   id="svg1376"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)"
+   sodipodi:docname="A0786.svg">
+  <title
+     id="title842">Fil och yoghurt</title>
+  <defs
+     id="defs1370" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="32"
+     inkscape:cx="33.677984"
+     inkscape:cy="14.684059"
+     inkscape:document-units="mm"
+     inkscape:current-layer="g873"
+     showgrid="true"
+     units="px"
+     inkscape:window-width="2048"
+     inkscape:window-height="1101"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:snap-global="false">
+    <inkscape:grid
+       type="xygrid"
+       id="grid1944" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata1373">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>Fil och yoghurt</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-284.29998)">
+    <g
+       id="g907"
+       transform="translate(0.03894099,0.66121036)">
+      <g
+         id="g1276"
+         transform="matrix(1.7771756,0,0,1.7771756,-4.6488232,-225.19917)">
+        <g
+           id="g873"
+           transform="matrix(1.0191257,0,0,1.0191257,0.33318038,-5.8163646)">
+          <path
+             style="opacity:0.2;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.16011788;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+             d="m 3.3778417,288.79743 h 4.6747065 c 0.161862,0 0.321162,0.13293 0.29217,0.29217 l -0.439014,2.41129 c -0.02899,0.15924 -0.130308,0.29217 -0.2921697,0.29217 H 3.8115303 c -0.1618617,0 -0.2635172,-0.13287 -0.2921692,-0.29217 L 3.0856725,289.0896 c -0.028652,-0.1593 0.1303075,-0.29217 0.2921692,-0.29217 z"
+             id="rect823-7"
+             inkscape:connector-curvature="0"
+             sodipodi:nodetypes="sssssssss" />
+          <path
+             style="opacity:1;fill:#2d769b;fill-opacity:1;stroke:none;stroke-width:0.16011788;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+             d="m 3.3870066,288.66049 h 4.6747068 c 0.1618617,0 0.3211618,0.13293 0.2921692,0.29217 l -0.439014,2.41129 c -0.028993,0.15924 -0.1303075,0.29217 -0.2921692,0.29217 H 3.8206952 c -0.1618617,0 -0.2635172,-0.13287 -0.2921692,-0.29217 l -0.4336886,-2.41129 c -0.028652,-0.1593 0.1303075,-0.29217 0.2921692,-0.29217 z"
+             id="rect823"
+             inkscape:connector-curvature="0"
+             sodipodi:nodetypes="sssssssss" />
+          <rect
+             style="opacity:0.2;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.16011791;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+             id="rect841-6"
+             width="5.8616438"
+             height="0.61172915"
+             x="2.7879593"
+             y="288.81009"
+             rx="0.29216915"
+             ry="0.29216915" />
+          <rect
+             style="opacity:1;fill:#ebebeb;fill-opacity:1;stroke:none;stroke-width:0.16011791;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+             id="rect841"
+             width="5.8616438"
+             height="0.61172915"
+             x="2.7935381"
+             y="288.65182"
+             rx="0.29216915"
+             ry="0.29216915" />
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

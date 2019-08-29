@@ -1,0 +1,42 @@
+@using System.ComponentModel.DataAnnotations
+@using System.Reflection
+@model IEnumerable<Diet.Models.Food>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EnergyKcal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Carbohydrates)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalFat)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Protein)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EnergyKcal)
+        </td> 
+        <td>
+            @Html.DisplayFor(modelItem => item.Carbohydrates)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalFat)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Protein)
+        </td>                   
+    </tr>
+}

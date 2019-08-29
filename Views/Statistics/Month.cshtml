@@ -1,0 +1,46 @@
+﻿@model Diet.ViewModels.StatisticsViewMonth;
+@{
+    ViewData["Title"] = "Statistics Month";
+}
+
+<partial name="_StatisticsNavigation"/>
+
+<h1>Month @Model.Month @DateTime.Now.Year</h1>
+
+<div class = "box">
+    <h2>Weight</h2>
+    <div id = "weights"></div>
+</div>
+
+<div class = "box">
+    <h2>Calories</h2>
+    <div id = "calories"></div>
+</div>
+
+<script>
+        
+    var weights = @Html.Raw(Json.Serialize(Model.Weights));
+
+    var chart = new Chartist.Line('#weights', {
+        series: [weights]},
+        {
+            fullWidth: true,            
+            lineSmooth: Chartist.Interpolation.simple({
+                fillHoles: true,
+            }),
+        low: 45
+    });
+
+    var calories = @Html.Raw(Json.Serialize(Model.Calories));
+
+    var chart1 = new Chartist.Bar('#calories', {
+        series: [calories]},
+        {
+            fullWidth: true,
+            low: 0
+        });
+    
+</script>
+
+
+

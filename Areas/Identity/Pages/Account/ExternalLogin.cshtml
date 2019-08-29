@@ -1,0 +1,106 @@
+@page
+@model ExternalLoginModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<h2>@ViewData["Title"]</h2>
+<h4>Associate your @Model.LoginProvider account.</h4>
+
+<p>
+    You've successfully authenticated with <strong>@Model.LoginProvider</strong>.
+    Please enter an email address and additional information for this site below and click the Register button to finish
+    logging in.
+</p>
+
+<section class="box">
+    <form asp-page-handler="Confirmation" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+        
+        <h4 class="subtitle">Create a new account.</h4>  
+        
+        <div asp-validation-summary="All"></div>
+
+        <p>    
+            <label asp-for="Input.Email"></label>
+            <input asp-for="Input.Email" placeholder="Email"/>                    
+            <span asp-validation-for="Input.Email"></span>
+        </p>    
+
+        <p>
+            <label asp-for="Input.BirthDate"></label>
+            <input asp-for="Input.BirthDate" placeholder="BirthDate"/>
+            <span asp-validation-for="Input.BirthDate"></span>
+        </p>
+
+        <p>
+            <label asp-for="Input.GenderId"></label>
+            @foreach (var gender in Model.Genders)
+            {
+                <input asp-for="Input.GenderId" type="radio" value="@gender.Id" checked='@(gender==Model.Genders.First() ? "checked": "")' /> @gender.Name
+            }
+            <span asp-validation-for="Input.GenderId"></span>
+        </p>
+
+        <p>
+            <label asp-for="Input.Height"></label>
+            <input asp-for="Input.Height" placeholder="Height"/>
+            <span asp-validation-for="Input.Height"></span>
+        </p>
+
+        <p>
+            <label asp-for="Input.Weight"></label>
+            <input asp-for="Input.Weight" placeholder="Weight"/>
+            <span asp-validation-for="Input.Weight"></span>
+        </p>
+        
+        
+         @{
+            var sedetary = 1.2;            
+            var lightlyActive = 1.375;
+            var moderatelyActive = 1.55;
+            var veryActive = 1.725;
+            var extraActive = 1.9;
+        }
+ 
+        <label asp-for="Input.PhysicalActivityLevel"></label>
+        <ul class = "input-list">
+            <li><input asp-for="Input.PhysicalActivityLevel" type="radio" value="@sedetary" checked="checked" />Sedentary </li>
+            <li><input asp-for="Input.PhysicalActivityLevel" type="radio" value="@lightlyActive" />Lightly active</li>
+            <!-- exercise 1-3 times per week -->
+            <li><input asp-for="Input.PhysicalActivityLevel" type="radio" value="@moderatelyActive" />Moderately active</li>
+            <!-- exercise 3-5 times per week -->
+            <li><input asp-for="Input.PhysicalActivityLevel" type="radio" value="@veryActive" />Very active</li>
+            <!-- exercise 6-7 times per week -->
+            <li><input asp-for="Input.PhysicalActivityLevel" type="radio" value="@extraActive" />Extra active</li>
+            <!-- Very hard exercise or work, elite -->
+        </ul>
+        <span asp-validation-for="Input.PhysicalActivityLevel"></span>
+        
+        @{
+            var goal0 = -1.0;
+            var goal1 = -0.5;
+            var goal2 = 0.0;
+            var goal3 = 0.5;
+            var goal4 = 1.0;
+        }
+
+        <label asp-for="Input.Goal"></label>
+        <ul class="input-list">
+            <li><input asp-for="Input.Goal" type="radio" value="@goal0" checked="checked" />Loose 1 kg</li>
+            <li><input asp-for="Input.Goal" type="radio" value="@goal1" />Loose 0.5 kg </li>
+            <li><input asp-for="Input.Goal" type="radio" value="@goal2" />Maintain weight </li>
+            <li><input asp-for="Input.Goal" type="radio" value="@goal3" />Gain 0.5 kg </li>
+            <li><input asp-for="Input.Goal" type="radio" value="@goal4" />Gain 1.0 kg </li>
+        <span asp-validation-for="Input.Goal"></span>
+        </ul>
+        
+        <p>
+            <button class = "primary" type="submit">Register</button>
+        </p>                     
+    </form>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+

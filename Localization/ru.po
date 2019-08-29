@@ -1,0 +1,2 @@
+msgid "Diary"
+msgstr "дневник"

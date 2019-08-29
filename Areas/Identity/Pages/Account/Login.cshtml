@@ -1,0 +1,80 @@
+@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Log in";
+}
+
+<div class = "container">
+
+<h2 class="title">@ViewData["Title"]</h2>
+
+<section class="box">
+    <form method="post">
+        <h4 class="subtitle">Use a local account to log in.</h4>              
+        <div asp-validation-summary="All"></div>
+        <p>
+            <label asp-for="Input.Email"></label>
+            <input placeholder="Email" asp-for="Input.Email"/>     
+            <span asp-validation-for="Input.Email"></span>     
+        </p>   
+
+        <p>
+            <label asp-for="Input.Password"></label>
+            <input asp-for="Input.Password" placeholder="Password"/>
+            <span asp-validation-for="Input.Password"></span>
+        </p>
+
+        @*
+        <label asp-for="Input.RememberMe" style="display: none;">
+            <input type="checkbox" asp-for="Input.RememberMe" checked="checked">
+            @Html.DisplayNameFor(m => m.Input.RememberMe)
+        </label> 
+        *@ 
+        
+        <p>
+            <div class="flex-space">
+                <button class="primary" type="submit" >Log in</button> 
+                <div>
+                    <a asp-page="./ForgotPassword">Forgot your password?</a>&nbsp;
+                    <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a> 
+                </div>      
+            </div>
+        </p>           
+    </form>
+</section>
+</div>
+
+
+<section class ="box">
+    <h4>Use another service to log in.</h4>
+    @{
+        if ((Model.ExternalLogins?.Count ?? 0) == 0)
+        {
+            <p>
+                No services available
+            </p>
+        }
+        else
+        {
+            <form asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                <div>
+                    <p>
+                        @foreach (var provider in Model.ExternalLogins)
+                        {
+                            <button type="submit" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">
+                                <img class="icon" src = "/images/login/@(provider.Name.ToLower()).svg" alt = "@(provider.Name) logo">
+                                @provider.DisplayName
+                                </button>
+                        }
+                    </p>
+                </div>
+            </form>
+        }
+    }
+</section>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

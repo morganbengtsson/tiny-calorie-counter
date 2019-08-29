@@ -1,0 +1,9 @@
+.facebook {
+    color: #fff;
+    background-color: #385499;
+}
+
+.google {
+    background-color: #fff;
+    border: 1px solid var(--border-color);
+}

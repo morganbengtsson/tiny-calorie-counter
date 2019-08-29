@@ -1,0 +1,26 @@
+﻿@using Microsoft.AspNetCore.Http.Features
+
+@{
+    var consentFeature = Context.Features.Get<ITrackingConsentFeature>();
+    var showBanner = !consentFeature?.CanTrack ?? false;
+    var cookieString = consentFeature?.CreateConsentCookie();
+}
+
+@if (showBanner)
+{
+    <nav id="cookieConsent" role="alert">
+        <p>
+            Tiny calorie counter uses cookies for a better user experience.
+            <a asp-controller="Home" asp-action="Privacy">Learn More</a>
+            <button type="button" data-cookie-string="@cookieString">Accept</button>
+        </p>
+    </nav>
+    <script>
+        (function () {
+            document.querySelector("#cookieConsent button[data-cookie-string]").addEventListener("click", function (el) {
+                document.cookie = el.target.dataset.cookieString;
+                document.querySelector("#cookieConsent").setAttribute("style", "display: none;");
+            }, false);
+        })();
+    </script>
+}

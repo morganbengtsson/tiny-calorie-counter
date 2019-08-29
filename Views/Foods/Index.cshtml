@@ -1,0 +1,49 @@
+@using System.ComponentModel.DataAnnotations
+@using System.Reflection
+@model IEnumerable<Diet.ViewModels.FoodView>
+
+<form asp-controller="Foods" asp-action="Index" method="get">
+    <p>
+        Title: <input type="text" name="q">
+        <input type="submit" value="Search" />
+    </p>
+</form>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Energy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Carbohydrates)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalFat)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Protein)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Energy)
+        </td> 
+        <td>
+            @Html.DisplayFor(modelItem => item.Carbohydrates)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalFat)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Protein)
+        </td>                   
+    </tr>
+}

@@ -1,0 +1,28 @@
+﻿@{
+    ViewData["Title"] = "An efficient tool for tracking calories";
+}
+
+<div class = "container">
+<div style = "margin-top: 2em;">
+    <p style="font-size: 2.5em;">
+        <strong>Tiny calorie counter</strong> is an efficient tool for tracking calories. Use it to loose weight, gain weight or keep your weight. 
+    </p> 
+    
+    <form asp-page="/Account/ExternalLogin" asp-area = "Identity" method="post" style="text-align: center;">
+
+        @foreach (var provider in Model.ExternalLogins)
+        {   
+            <button class = "@provider.Name.ToLower()" type="submit" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">
+                <img class="icon" src = "/images/login/@(provider.Name.ToLower()).svg" alt = "@(provider.Name) logo">
+                @provider.DisplayName
+            </button>
+        }
+        <a class = "button primary" asp-area="Identity" asp-page="/Account/Register">Register</a>        
+    </form>            
+    <p>
+        <img class="preview" alt = "Preview of daily calorie statistics" src = "/images/preview.png" style="width:100%;">
+    </p>
+    
+</div>
+</div>
+

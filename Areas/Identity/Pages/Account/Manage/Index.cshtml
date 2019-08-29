@@ -1,0 +1,98 @@
+@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Profile";
+}
+
+<div class = "box">
+<h4>@ViewData["Title"]</h4>
+@Html.Partial("_StatusMessage", Model.StatusMessage)
+<div>
+    <div class="col-md-6">
+        <form id="profile-form" method="post">
+
+        <div asp-validation-summary="All"></div>
+        
+        <p>
+            <label asp-for="Username"></label>
+            <input asp-for="Username" class="form-control" disabled />
+        </p>
+
+        <p>
+            <label asp-for="Input.Email"></label>
+            @if (Model.IsEmailConfirmed)
+            {
+                <div class="input-group">
+                    <input asp-for="Input.Email" class="form-control" />
+                    <span class="input-group-addon" aria-hidden="true"><span class="glyphicon glyphicon-ok text-success"></span></span>
+                </div>
+            }
+            else
+            {
+                <input asp-for="Input.Email" class="form-control" />
+                <button id="email-verification" type="submit" asp-page-handler="SendVerificationEmail" class="btn btn-link">Send verification email</button>
+            }
+            <span asp-validation-for="Input.Email" class="text-danger"></span>
+        </p>
+
+        <p>
+            <label asp-for="Input.PhoneNumber"></label>
+            <input asp-for="Input.PhoneNumber" class="form-control" />
+            <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+        </p>
+
+        <p>
+            <label asp-for="Input.BirthDate"></label>
+            <input asp-for="Input.BirthDate" placeholder="BirthDate"/>
+            <span asp-validation-for="Input.BirthDate"></span>
+        </p>
+
+        <p>
+        <label asp-for="Input.GenderId"></label>
+            @foreach (var gender in Model.Genders)
+            {
+                <input asp-for="Input.GenderId" type="radio" value="@gender.Id" @(gender==Model.Genders.First() ? "checked": "") /> @gender.Name
+            }
+            <span asp-validation-for="Input.GenderId"></span>
+        </p>
+
+        <p>   
+            <label asp-for="Input.Height"></label>
+            <input asp-for="Input.Height" placeholder="Height"/>
+            <span asp-validation-for="Input.Height"></span>
+        </p> 
+        
+        <p>
+            <label asp-for="Input.PhysicalActivityLevel"></label>
+            <ul class="input-list">
+                <li><input asp-for="Input.PhysicalActivityLevel" type="radio" value="1.2" @(Model.Input.PhysicalActivityLevel == 1.2 ? "checked": "") />Sedentary</li>
+                <li><input asp-for="Input.PhysicalActivityLevel" type="radio" value="1.375" @(Model.Input.PhysicalActivityLevel == 1.375 ? "checked": "")/>Lightly active</li>
+                <li><input asp-for="Input.PhysicalActivityLevel" type="radio" value="1.55" @(Model.Input.PhysicalActivityLevel == 1.55 ? "checked": "")/>Moderately active</li>
+                <li><input asp-for="Input.PhysicalActivityLevel" type="radio" value="1.725" @(Model.Input.PhysicalActivityLevel == 1.725 ? "checked": "")/>Very active</li>
+                <li><input asp-for="Input.PhysicalActivityLevel" type="radio" value="1.9" @(Model.Input.PhysicalActivityLevel == 1.9 ? "checked": "")/> Extra active</li>
+            </ul>
+            <span asp-validation-for="Input.PhysicalActivityLevel"></span>
+        </p>
+
+        <p>
+            <label asp-for="Input.Goal"></label>
+            <ul class="input-list">
+                <li><input asp-for="Input.Goal" type="radio" value="-1.0" @(Model.Input.Goal == -1.0 ? "checked": "") />Loose 1 kg</li>
+                <li><input asp-for="Input.Goal" type="radio" value="-0.5" @(Model.Input.Goal == -0.5 ? "checked": "") />Loose 0.5 kg</li>
+                <li><input asp-for="Input.Goal" type="radio" value="0.0" @(Model.Input.Goal == 0.0 ? "checked": "") />Maintain weight</li>
+                <li><input asp-for="Input.Goal" type="radio" value="0.5" @(Model.Input.Goal == 0.5 ? "checked": "") />Gain 0.5 kg</li>
+                <li><input asp-for="Input.Goal" type="radio" value="1.0" @(Model.Input.Goal == 1.0 ? "checked": "") />Gain 1.0 kg</li>
+            </ul>
+            <span asp-validation-for="Input.Goal"></span>
+        </p>
+        <p>
+           <button type="submit" class="primary">Save</button>
+        </p>
+        </form>
+    </div>
+</div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

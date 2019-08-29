@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.1.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.1.2" />
+    <PackageReference Include="Microsoft.Extensions.Localization" Version="2.1.1"/>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.5" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="2.2.0-preview1" />
+    <PackageReference Include="OrchardCore.Localization.Core" Version="1.0.0-beta2-67846" />
+    <PackageReference Include="EPPlus" Version="4.5.2.1" />
+  </ItemGroup> 
+  <ItemGroup Condition="'$(Configuration)' == 'Release'">
+    <None Update="client.pfx" CopyToOutputDirectory="PreserveNewest" />
+    <None Update="app.yaml" CopyToOutputDirectory="PreserveNewest" />
+    <None Update="Seed/8b. AUSNUT 2011-13 AHS Food Nutrient Database.xls" CopyToOutputDirectory="PreserveNewest" />
+    <None Update="Seed/8b. AUSNUT 2011-13 AHS Food Nutrient Database.xlsx" CopyToOutputDirectory="PreserveNewest" />
+    <None Update="Seed/8e. AUSNUT 2011-13 AHS Food Measures File.xlsx" CopyToOutputDirectory="PreserveNewest" />
+    <None Update="Seed/8j. 2011-13 AHS to 1995 NNS 3 digit concordance.xls" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+  <PropertyGroup>
+  <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
+</PropertyGroup>
+</Project>

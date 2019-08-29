@@ -1,0 +1,312 @@
+@using System.ComponentModel.DataAnnotations
+@using System.Reflection
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@model Diet.ViewModels.DiaryView
+
+@{
+    ViewData["Title"] = "Diary";
+}
+
+<article>
+    <div class = "flex-space">
+        <div class = "flex-space">
+            <a class = "button" asp-route="diary" asp-route-date='@Model.Date.AddDays(-1).ToString("yyyy-MM-dd")'>
+                <i class="fas fa-arrow-left"></i>
+            </a>
+            <a class = "button" asp-route="diary" asp-route-date='@Model.Date.AddDays(1).ToString("yyyy-MM-dd")'>
+                <i class="fas fa-arrow-right"></i>
+            </a>     
+            <h2>@Model.Date.ToString("dddd dd MMMM yyyy")</h2>
+        </div> 
+        <a class = "button" style = "margin: 0;" asp-route="diary" asp-route-date='@DateTime.Today.ToString("yyyy-MM-dd")'>Today</a>
+    </div>
+    <div asp-validation-summary="All"></div>
+
+    
+    <form autocomplete = "off" asp-route="diary" method="get">  
+        <p class = "flex"> 
+            <input class = "shadow" style="border-radius: var(--radius) 0 0 var(--radius); padding: 1.0em;" type="text" name="q" id = "input"  placeholder="Search food (eg 100g chocolate 12:30)" @if(Model.Foods.Count() == 0){<text>autofocus</text>} value="@Model.q">   
+            <button class = "shadow" type="submit" style="border-radius: 0 var(--radius) var(--radius) 0; padding: 1.0em; border: 1px solid var(--border-color); margin: 0;">
+                <i class = "fas fa-search"></i>
+            </button>
+        </p>         
+    </form>       
+    
+    @if(Model.Foods.Count() > 1) {  
+        <div class = "suggestions"> 
+        @if(Model.Foods.Count() == 0)
+        {                      
+            @foreach(var food in Model.RecentFoods) {
+                <a class = "suggestion" href="@Url.RouteUrl("diary", new { FoodId = food.Id, q = Model.q })">
+                    <i class="far fa-clock" style = "margin-left: 1em; margin-right: 1em;"></i>
+                    <p>@food.HtmlTitle</p>
+                    <span class="food-energy"></span>
+                </a>                     
+            }
+        }     
+        @foreach(var food in Model.Foods) {    
+            <a class = "suggestion" href="@Url.RouteUrl("diary", new { FoodId = food.Id, q = Model.q})">
+                <i class="fas fa-circle" style="color:@food.Color; margin-left: 1em; margin-right: 1em;"></i>
+                <p>@food.HtmlTitle</p>
+                <span class="food-energy"></span>
+            </a>   
+        }
+        </div>       
+    }
+    else if (Model.Foods.Count() == 1)
+    {
+        var food = Model.Foods.First(); 
+        <div class = "flex-space" style = "background-color: var(--color); margin-top: -1em;">
+            <div class = "flex">
+                <i class="fas fa-circle" style="color:@food.Color; margin-left: 1em; margin-right: 1em;"></i>
+                <p style="color: #fff;">@food.HtmlTitle</p>
+                <span class="food-energy"></span>
+            </div>
+            <a asp-action="Index" asp-controller="Diary">
+                <i class="fas fa-times" style="margin: 1em;"></i>
+            </a>
+        </div>
+        <form class = "flex-space" style = "padding: 1em; border: 1px solid var(--border-color);" autocomplete = "off" asp-route="diary" asp-route-date='@Model.Date.ToString("yyyy-MM-dd")' asp-route-action="index" method="post">
+            <div>
+            <input asp-for="FoodId" class="food-id" type="hidden" value="@food.Id">
+            <input asp-for="Amount" type="text" style="width: auto;" placeholder="Amount" autofocus> 
+            <select asp-for="UnitId" asp-items="food.Units">
+            </select>
+            <input asp-for="Time" class = "w3-input" type="time"> 
+            </div>
+            <button class = "primary" type = "submit">Add</button>
+        </form>
+    }
+
+<section class = "box">
+    <header style= "margin-bottom: 1em; text-align: center;">
+        <div class = "charts" style="margin-bottom: 1em; font-size: 0.8em;">
+            <div style="min-width: 200px;">
+                <h3>@Model.Entries.Sum(e => e.EnergyKcal) / @Model.RecommendedKcal kcal total</h3>                
+                <div class="ct-chart ct-perfect-fourth" id = "energy-kcal"></div> 
+            </div> 
+            <div class = "small-charts">
+                <div style="width: 30%">
+                    <h3>@Model.CarbohydratesKcal / @((int)(Model.RecommendedKcal * 0.6)) kcal carbohydrates</h3>
+                    <div class="ct-chart ct-perfect-fourth" id = "carbohydrates-kcal">
+                    </div>
+                </div>            
+                <div style="width: 30%">
+                    <h3>@Model.ProteinKcal / @((int)(Model.RecommendedKcal * 0.2)) kcal protein</h3>
+                    <div class="ct-chart ct-perfect-fourth" id = "protein-kcal"></div>
+                </div> 
+
+                <div style="width: 30%">
+                    <h3>@Model.FatKcal / @((int)(Model.RecommendedKcal * 0.2)) kcal fat</h3>        
+                    <div class="ct-chart ct-perfect-fourth" id = "fat-kcal"></div>          
+                </div>   
+            </div>
+        </div>              
+    </header> 
+
+        @foreach(var group in Model.GroupedEntries)
+        {
+            <section>
+                <header style = "border-bottom: 1px solid var(--border-color);">
+                    <p><strong>@group.Sum(e => e.EnergyKcal) kcal  &#8226; @group.Min(e => e.Date).ToShortTimeString() - @group.Max(e => e.Date).ToShortTimeString()</strong></p>
+                </header>
+                @foreach(var entry in group) 
+                {
+                    <div style = "padding: 1em; border-bottom: 1px solid var(--border-color);" class = "flex-space">
+                        <div>
+                            <i class="fas fa-circle" style="color:@entry.GetColor(); margin-right: 1em;"></i>                            
+                            <span>@entry.Food.Title</span> 
+                             &#8226;                      
+                            <span>@entry.EnergyKcal kcal</span>
+                            &#8226;    
+                            <span>@String.Format("{0:0.00}", entry.Quantity)</span>
+                            <span>@entry.Unit.ToString().ToLower()</span>                                        
+                        </div>  
+                        <a asp-route="diary" asp-route-date='@Model.Date.ToString("yyyy-MM-dd")' asp-route-action="delete" asp-route-id="@entry.Id">                        
+                            <i class="fas fa-times"></i>                            
+                        </a>
+                    </div>
+                }     
+            </section> 
+        }
+</section>
+<section>
+@if(!Model.Weight.HasValue) {
+    <p>
+        <form class = "box" autocomplete = "off" asp-route="diary" asp-route-date='@Model.Date.ToString("yyyy-MM-dd")' asp-route-action="index" method="post">
+            <p>
+                <label asp-for="Weight"></label>
+                <input asp-for="Weight" placeholder="Current weight (eg 95)">
+                <span asp-validation-for="Weight"></span>
+            </p>            
+            <p>
+                <button class = "primary" type = "submit">Submit</button>
+            </p>
+        </form>
+    </p>
+    }
+    else
+    {
+        <div class = "box">
+            <div style = "padding: 1em; border-bottom: 1px solid var(--border-color);" class = "flex-space">
+                <div>
+                    <strong>Weight: </strong>                                                          
+                    <span>@Model.Weight</span> 
+                </div>  
+                <a asp-route="diary" asp-route-date='@Model.Date.ToString("yyyy-MM-dd")' asp-route-action="deleteweightentry">                        
+                    <i class="fas fa-times"></i>                            
+                </a>
+            </div>
+        </div>
+
+    }
+</section>    
+</article>
+@{
+
+    //TODO: Refactor this section, too big!
+
+    var energySum = Model.Entries.Sum(e => e.EnergyKcal);
+    var energyClamped = Math.Clamp(energySum, 0, Model.RecommendedKcal);
+    var energyLeft = Model.RecommendedKcal - energySum;
+    var energies = new List<int>();
+    var energiesColor0 = "#FFC43D";
+    var energiesColor1 = "#25A18E";
+
+    if (energyLeft < 0){
+        energies = new List<int>{-energyLeft, energyClamped + energyLeft};
+        energiesColor0 = "#FFC43D";
+        energiesColor1 = "#25A18E";             
+    }
+    else {
+        energies = new List<int>{energyClamped, energyLeft};
+        energiesColor0 = "#25A18E";
+        energiesColor1 = "#bbf0e8";
+    }
+    
+
+    var carbsRecommended = (int)(Model.RecommendedKcal * 0.6);
+    var carbsLeft = carbsRecommended - Model.CarbohydratesKcal;
+    var carbsClamped = Math.Clamp(Model.CarbohydratesKcal, 0, carbsRecommended);
+    var carbs = new List<int>();
+    var carbsColor0 = "";
+    var carbsColor1 = "";
+
+    if (carbsLeft < 0){
+        carbs = new List<int>{-carbsLeft, carbsClamped + carbsLeft};
+        carbsColor0 = "#FFC43D";
+        carbsColor1 = "#25A18E";             
+    }
+    else {
+        carbs = new List<int>{carbsClamped, carbsLeft};
+        carbsColor0 = "#25A18E";
+        carbsColor1 = "#bbf0e8";
+    }
+
+
+    var proteinRecommended = (int)(Model.RecommendedKcal * 0.2);
+    var proteinLeft = proteinRecommended - Model.ProteinKcal;
+    var proteinClamped = Math.Clamp(Model.ProteinKcal, 0, proteinRecommended);
+    var proteins = new List<int>();
+    var proteinsColor0 = "";
+    var proteinsColor1 = "";
+
+    if (proteinLeft < 0){
+        proteins = new List<int>{-proteinLeft, proteinClamped + proteinLeft};
+        proteinsColor0 = "#FFC43D";
+        proteinsColor1 = "#25A18E";             
+    }
+    else {
+        proteins = new List<int>{proteinClamped, proteinLeft};
+        proteinsColor0 = "#25A18E";
+        proteinsColor1 = "#bbf0e8";
+    }
+
+    var fatRecommended = (int)(Model.RecommendedKcal * 0.2);
+    var fatLeft = fatRecommended - Model.FatKcal;
+    var fatClamped = Math.Clamp(Model.FatKcal, 0, fatRecommended);
+    var fats = new List<int>();
+    var fatsColor0 = "";
+    var fatsColor1 = "";
+
+    if (fatLeft < 0){
+        fats = new List<int>{-fatLeft, fatClamped + fatLeft};
+        fatsColor0 = "#FFC43D";
+        fatsColor1 = "#25A18E";                  
+    }
+    else {
+        fats = new List<int>{fatClamped, fatLeft};
+        fatsColor0 = "#25A18E";
+        fatsColor1 = "#bbf0e8";
+    }
+}
+<style>
+    #energy-kcal .ct-series-a .ct-slice-donut {
+        stroke: @energiesColor0;
+    }
+    #energy-kcal .ct-series-b .ct-slice-donut {
+        stroke: @energiesColor1;             
+    }
+    
+    #carbohydrates-kcal .ct-series-a .ct-slice-donut {
+        stroke: @carbsColor0;
+    }
+    #carbohydrates-kcal .ct-series-b .ct-slice-donut {
+        stroke: @carbsColor1;             
+    }
+    
+    #protein-kcal .ct-series-a .ct-slice-donut {
+        stroke: @proteinsColor0;
+    }
+    #protein-kcal .ct-series-b .ct-slice-donut {
+        stroke: @proteinsColor1;             
+    }   
+    
+    #fat-kcal .ct-series-a .ct-slice-donut {
+        stroke: @fatsColor0;
+    }
+    #fat-kcal .ct-series-b .ct-slice-donut {
+        stroke: @fatsColor1;             
+    }           
+</style>
+
+<script>
+new Chartist.Pie('#energy-kcal', {
+  series: @Html.Raw(Json.Serialize(energies))
+}, {  
+  donut: true,
+  donutWidth: 15,
+  startAngle: 0,
+  showLabel: false
+});
+
+new Chartist.Pie('#carbohydrates-kcal', {
+  series: @Html.Raw(Json.Serialize(carbs))
+}, {  
+  donut: true,
+  donutWidth: 15,
+  startAngle: 0,
+  showLabel: false
+});
+
+new Chartist.Pie('#protein-kcal', {
+  series: @Html.Raw(Json.Serialize(proteins))
+}, {  
+  donut: true,
+  donutWidth: 15,
+  startAngle: 0,
+  showLabel: false
+});
+
+new Chartist.Pie('#fat-kcal', {
+  series: @Html.Raw(Json.Serialize(fats))
+}, {  
+  donut: true,
+  donutWidth: 15,
+  startAngle: 0,
+  showLabel: false
+});
+
+
+</script>
