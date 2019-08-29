@@ -99,7 +99,7 @@ namespace Diet
             services.AddPortableObjectLocalization(options =>
             options.ResourcesPath = "Localization");
 
-            //TODO: Move to extension method, or more configuratble
+            //TODO: Move to extension method, or more configurable
             services.AddDbContext<SQLiteContext>();
             var connectionString = new NpgsqlConnectionStringBuilder(Configuration["CloudSql:ConnectionString"])
             {
@@ -130,6 +130,7 @@ namespace Diet
             services.AddDefaultIdentity<ApplicationUser>()
                 .AddEntityFrameworkStores<MainContext>();
 
+            /*
             services.AddAuthentication().AddGoogle(googleOptions =>
             {
                 googleOptions.ClientId = Configuration["Authentication:Google:ClientId"];
@@ -141,6 +142,7 @@ namespace Diet
                 facebookOptions.AppId = Configuration["Authentication:Facebook:AppId"];
                 facebookOptions.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
             });
+            */
 
             services.AddTransient<IEmailSender, EmailSender>();
         }
